@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Linq;
 using UnityEngine;
 using KModkit;
@@ -54,6 +55,46 @@ public class BrainfScript : MonoBehaviour
 
     //Used to blank the stage number for user input
     bool inputStarted;
+
+    //Twitch help message
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Input the answer with “!{0} (answer)”, eg: “!{0} 28” to input 28. Use “!{0} clr” to clear the input and “!{0} ok” to submit.";
+#pragma warning restore 414
+
+    public IEnumerator ProcessTwitchCommand(string command)
+    {
+        command = command.ToLowerInvariant().Trim();
+
+        if (fullStopSolved)
+        {
+            yield return "sendtochaterror Now is not the time to input.";
+        }
+
+        //If the input is a 1 or 2 digit number
+        if (Regex.IsMatch(command, @"^\d{1,2}"))
+        {
+            //Goes through each digit to 
+            foreach (char digit in command)
+            {
+                yield return null;
+                keypad[int.Parse(digit.ToString())].OnInteract();
+            }
+        }
+        else if (command == "ok")
+        {
+            yield return null;
+            keypad[10].OnInteract();
+        }
+        else if (command == "clr")
+        {
+            yield return null;
+            keypad[11].OnInteract();
+        }
+        else
+        {
+            yield return "sendtochaterror The command you inputted is incorrect.";
+        }
+    }
 
     void Awake()
     {
@@ -330,6 +371,7 @@ public class BrainfScript : MonoBehaviour
         {
             GetComponent<KMBombModule>().HandlePass();
             Debug.LogFormat("[Brainf--- #{0}] Some error occured where the solveable module count is 0. Automatically solving.", moduleId);
+            moduleSolved = true;
         }
         else
         {
@@ -489,11 +531,11 @@ public class BrainfScript : MonoBehaviour
             //Moves the text so it is in the centre
             if (script[solvedModules] == '.' | script[solvedModules] == ',')
             {
-                symbolMesh.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 2.64f);
+                symbolMesh.transform.localPosition = new Vector3(0.0f, 0.27f, 2.64f);
             }
             else
             {
-                symbolMesh.transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0.04f);
+                symbolMesh.transform.localPosition = new Vector3(0.0f, 0.27f, 0.04f);
             }
         }
     }
