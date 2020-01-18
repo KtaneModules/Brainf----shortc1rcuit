@@ -25,7 +25,7 @@ public class BrainfScript : MonoBehaviour
     //Defines the keys on the keypad
     public KMSelectable[] keypad;
 
-    //array to store all the types of Brainf*** characters
+    //array to store all the types of Brainf--- characters
     readonly char[] symbols = new char[8] { '<', '>', '+', '-', '[', ']', ',', '.' };
     int sympos;
 
@@ -71,7 +71,7 @@ public class BrainfScript : MonoBehaviour
         }
     }
 
-    //Used to randomly generate a program in brainf*** for the module to use
+    //Used to randomly generate a program in Brainf--- for the module to use
     char[] GenerateProgram(int size)
     {
         //bool to see whether there is a loop that isn't finished
@@ -83,10 +83,10 @@ public class BrainfScript : MonoBehaviour
         //array to store the randomly generated program in the methhod we add one to store the fullstop at the end
         char[] program = new char[size + 1];
 
-        //For loop to generate the brainf*** code
+        //For loop to generate the Brainf--- code
         for (int i = 0; i < size; i++)
         {
-            //take a random brainf*** character and puts it the programm array
+            //take a random Brainf--- character and puts it the programm array
             sympos = UnityEngine.Random.Range(0, 8);
             program[i] = symbols[sympos];
 
@@ -161,7 +161,7 @@ public class BrainfScript : MonoBehaviour
         //Runs through all the symbols in the program and follows them
         for (int i = 0; i < program.Count(); i++)
         {
-            Debug.LogFormat("[Brainf*** #{0}] Step {1}:", moduleId, stepcount);
+            Debug.LogFormat("[Brainf--- #{0}] Step {1}:", moduleId, stepcount);
 
             if (program[i] == '<')
             {
@@ -169,13 +169,13 @@ public class BrainfScript : MonoBehaviour
                 if (tapepos == 0)
                 {
                     tapepos++;
-                    Debug.LogFormat("[Brainf*** #{0}] Going right instead of left, now in position {1} on {2}.", moduleId, tapepos, tape[tapepos]);
+                    Debug.LogFormat("[Brainf--- #{0}] Going right instead of left, now in position {1} on {2}.", moduleId, tapepos, tape[tapepos]);
                 }
                 //Else go left
                 else
                 {
                     tapepos -= 1;
-                    Debug.LogFormat("[Brainf*** #{0}] Going left, now in position {1} on {2}.", moduleId, tapepos, tape[tapepos]);
+                    Debug.LogFormat("[Brainf--- #{0}] Going left, now in position {1} on {2}.", moduleId, tapepos, tape[tapepos]);
                 }
             }
             else if (program[i] == '>')
@@ -186,12 +186,12 @@ public class BrainfScript : MonoBehaviour
                 {
                     tape.Add(0);
                 }
-                Debug.LogFormat("[Brainf*** #{0}] Going right, now in position {1} on {2}.", moduleId, tapepos, tape[tapepos]);
+                Debug.LogFormat("[Brainf--- #{0}] Going right, now in position {1} on {2}.", moduleId, tapepos, tape[tapepos]);
             }
             else if (program[i] == '+')
             {
                 tape[tapepos]++;
-                Debug.LogFormat("[Brainf*** #{0}] Adding 1 to position {1}. Position {1} is now {2}.", moduleId, tapepos, tape[tapepos]);
+                Debug.LogFormat("[Brainf--- #{0}] Adding 1 to position {1}. Position {1} is now {2}.", moduleId, tapepos, tape[tapepos]);
             }
             else if (program[i] == '-')
             {
@@ -199,32 +199,32 @@ public class BrainfScript : MonoBehaviour
                 if (tape[tapepos] == 0)
                 {
                     tape[tapepos]++;
-                    Debug.LogFormat("[Brainf*** #{0}] Adding 1 to position {1} instead of subtracting. Position {1} is now {2}.", moduleId, tapepos, tape[tapepos]);
+                    Debug.LogFormat("[Brainf--- #{0}] Adding 1 to position {1} instead of subtracting. Position {1} is now {2}.", moduleId, tapepos, tape[tapepos]);
                 }
                 else
                 {
                     tape[tapepos] -= 1;
-                    Debug.LogFormat("[Brainf*** #{0}] Subtracting 1 from position {1}. Position {1} is now {2}.", moduleId, tapepos, tape[tapepos]);
+                    Debug.LogFormat("[Brainf--- #{0}] Subtracting 1 from position {1}. Position {1} is now {2}.", moduleId, tapepos, tape[tapepos]);
                 }
             }
             else if (program[i] == '[')
             {
                 loopstart = i;
                 looptimes = 0;
-                Debug.LogFormat("[Brainf*** #{0}] Starting loop.", moduleId);
+                Debug.LogFormat("[Brainf--- #{0}] Starting loop.", moduleId);
             }
             else if (program[i] == ']')
             {
                 //The origanal rules of looping still apply. However, each loop can repeat no more than x times where x = batteries + 1
                 if ((tape[tapepos] == 0) | (looptimes == bomb.GetBatteryCount() + 1))
                 {
-                    Debug.LogFormat("[Brainf*** #{0}] End of loop.", moduleId);
+                    Debug.LogFormat("[Brainf--- #{0}] End of loop.", moduleId);
                 }
                 else
                 {
                     looptimes++;
                     i = loopstart;
-                    Debug.LogFormat("[Brainf*** #{0}] Going to the start of the loop. You have now looped {1} time(s).", moduleId, looptimes);
+                    Debug.LogFormat("[Brainf--- #{0}] Going to the start of the loop. You have now looped {1} time(s).", moduleId, looptimes);
                 }
             }
             else if (program[i] == ',')
@@ -262,7 +262,7 @@ public class BrainfScript : MonoBehaviour
                 //The value of y is asigned to the current cell
                 tape[tapepos] = y;
 
-                Debug.LogFormat("[Brainf*** #{0}] Position {1} is now equal to {2}.", moduleId, tapepos, y);
+                Debug.LogFormat("[Brainf--- #{0}] Position {1} is now equal to {2}.", moduleId, tapepos, y);
             }
             //This is for when the fullstop comes up
             else
@@ -285,7 +285,7 @@ public class BrainfScript : MonoBehaviour
         char[] mychar = { ' ', ',' };
         tapestring = tapestring.TrimEnd(mychar);
 
-        Debug.LogFormat("[Brainf*** #{0}] The tape is {1}", moduleId, tapestring);
+        Debug.LogFormat("[Brainf--- #{0}] The tape is {1}", moduleId, tapestring);
     }
 
     // Use this for initialization
@@ -293,10 +293,10 @@ public class BrainfScript : MonoBehaviour
     {
         //Finds all the modules on the bomb that are bosses or other modules that need to be ignored.
         //Make sure you have the KMBossModule script on your module or this will produce an error
-        Ignoreds = GetComponent<KMBossModule>().GetIgnoredModules("Brainf***", new string[]{
+        Ignoreds = GetComponent<KMBossModule>().GetIgnoredModules("Brainf---", new string[]{
             "14",
             "Bamboozling Time Keeper",
-            "Brainf***",
+            "Brainf---",
             "Forget Enigma",
             "Forget Everything",
             "Forget It Not",
@@ -329,18 +329,18 @@ public class BrainfScript : MonoBehaviour
         if (count == 0)
         {
             GetComponent<KMBombModule>().HandlePass();
-            Debug.LogFormat("[Brainf*** #{0}] Some error occured where the solveable module count is 0. Automatically solving.", moduleId);
+            Debug.LogFormat("[Brainf--- #{0}] Some error occured where the solveable module count is 0. Automatically solving.", moduleId);
         }
         else
         {
             //Runs the generate program method with the array size of the value just worked out
             script = GenerateProgram(count);
-            Debug.LogFormat("[Brainf*** #{0}] The program is {1}", moduleId, new string(script));
+            Debug.LogFormat("[Brainf--- #{0}] The program is {1}", moduleId, new string(script));
 
             //Gives us all the answers that we have to input
             AnswerProgram(script);
 
-            Debug.LogFormat("[Brainf*** #{0}] The answers are {1}", moduleId, string.Join(", ", answers.ToArray()));
+            Debug.LogFormat("[Brainf--- #{0}] The answers are {1}", moduleId, string.Join(", ", answers.ToArray()));
         }
     }
 
@@ -394,14 +394,14 @@ public class BrainfScript : MonoBehaviour
                         stageMesh.text = "GG";
                         moduleSolved = true;
                         GetComponent<KMBombModule>().HandlePass();
-                        Debug.LogFormat("[Brainf*** #{0}] Module solved.", moduleId);
+                        Debug.LogFormat("[Brainf--- #{0}] Module solved.", moduleId);
                     }
                 }
                 else
                 {
                     //Gives a strike
                     GetComponent<KMBombModule>().HandleStrike();
-                    Debug.LogFormat("[Brainf*** #{0}] You submitted {1}, when the answer was {2}. Incorrect.", moduleId, stageMesh.text, answers[0]);
+                    Debug.LogFormat("[Brainf--- #{0}] You submitted {1}, when the answer was {2}. Incorrect.", moduleId, stageMesh.text, answers[0]);
 
                     //The stage number display shows the last 2 digits of the stage number
                     if (solvedModules < 10)
@@ -476,7 +476,7 @@ public class BrainfScript : MonoBehaviour
             {
                 GetComponent<KMBombModule>().HandleStrike();
                 answers.RemoveAt(0);
-                Debug.LogFormat("[Brainf*** #{0}] You continued before solving. Strike!", moduleId);
+                Debug.LogFormat("[Brainf--- #{0}] You continued before solving. Strike!", moduleId);
                 fullStopSolved = true;
             }
 

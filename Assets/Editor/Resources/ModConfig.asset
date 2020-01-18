@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Name: ModConfig
   m_EditorClassIdentifier: 
   id: brainf
-  title: Brainf***
+  title: Brainf---
   author: short_c1rcuit
-  description: "Brainf***\n-[--->+<]>---.[------>+<]>--.--[--->+<]>-.+++[->+++<]>.-.-[--->+<]>-.[-->+++<]>+.+.--[--->++<]>.++[->+++<]>.+++++++++.+++.[-->+++++<]>+++.+[----->+<]>.----.+++.--------.-[--->+<]>-.[->+++<]>++.-.+++.-[--->+<]>-.++[--->++<]>.-----------.+++++++++++++.-------.--[--->+<]>--.[->+++<]>++.++++++.--.[->+++<]>-.\r\n\r\nModule
-    ID: brainf\r\n\r\nCreated by Short_c1rcuit\r\n\r\nManual available here: https://ktane.timwi.de/HTML/Brainf.html\n\r\nBuild
-    1.0 notes:\r\nInitial release"
-  version: 1.0
+  description: "Brainf---\n-[--->+<]>---.[------>+<]>--.--[--->+<]>-.+++[->+++<]>.-.-[--->+<]>-.[-->+++<]>+.+.--[--->++<]>.++[->+++<]>.+++++++++.+++.[-->+++++<]>+++.+[----->+<]>.----.+++.--------.-[--->+<]>-.[->+++<]>++.-.+++.-[--->+<]>-.++[--->++<]>.-----------.+++++++++++++.-------.--[--->+<]>--.[->+++<]>++.++++++.--.[->+++<]>-.\r\n\r\nModule
+    ID: brainf\r\n\r\nCreated by Short_c1rcuit\r\n\r\nManual available here: https://ktane.timwi.de/HTML/Brainf---.html\n\r\nBuild
+    1.0 notes:\r\nInitial release\n\nBuild 1.1 notes:\nChanged the name from Brainf***
+    to Brainf--- to work with the KTaNE repo"
+  version: 1.1
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}

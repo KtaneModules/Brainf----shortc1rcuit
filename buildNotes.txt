@@ -9,3 +9,6 @@ Manual available here: https://ktane.timwi.de/HTML/Brainf.html
 
 Build 1.0 notes:
 Initial release
+
+Build 1.1 notes:
+Changed the name from Brainf*** to Brainf--- to work with the KTaNE repo
