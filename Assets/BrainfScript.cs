@@ -84,6 +84,10 @@ public class BrainfScript : MonoBehaviour
         {
             yield return null;
             keypad[10].OnInteract();
+            if (fullStopSolved)
+            {
+                yield return "awardpoints 5";
+            }
         }
         else if (command == "clr")
         {
@@ -170,10 +174,26 @@ public class BrainfScript : MonoBehaviour
 
             /*The comma and the full stop should only occur after char 10 in the program and at least 10 characters before the end of the program
 			  This is so the is still time to adjust the value of that cell*/
-            if ((program[i] == ',' || program[i] == '.') && (i < 10 || i > (size - 10) || openloop == true))
+            if ((program[i] == ',' || program[i] == '.'))
             {
-                //Subtracts 1 from the for loop counter so it can regenerate a new random character
-                i -= 1;
+                if (i < 10 || i > (size - 10) || openloop == true)
+                {
+                    //Subtracts 1 from the for loop counter so it can regenerate a new random character
+                    i -= 1;
+                }
+                else
+                {
+                    //Loops through the last 10 characters check to see if they are the same as the current one
+                    for (int j = 1; j <= 10; j++)
+                    {
+                        if (program[i - j] == program[i])
+                        {
+                            //Subtracts 1 from the for loop counter so it can regenerate a new random character
+                            i -= 1;
+                            break;
+                        }
+                    }
+                }
                 continue;
             }
         }

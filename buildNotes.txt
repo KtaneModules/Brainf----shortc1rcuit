@@ -16,3 +16,12 @@ Changed the name from Brainf*** to Brainf--- to work with the KTaNE repo
 Build 1.2 notes:
 Added TP support
 Fixed text issue
+
+Build 1.3 notes:
+Added awardpoints command
+
+Build 1.4 notes:
+Stopped . and , from being too concentrated
+
+Build 1.5 notes:
+Balanced out the scoring for tp
