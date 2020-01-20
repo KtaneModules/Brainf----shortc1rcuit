@@ -100,7 +100,13 @@ public class BrainfScript : MonoBehaviour
         }
     }
 
-    void Awake()
+    void TwitchHandleForcedSolve()
+    {
+        GetComponent<KMBombModule>().HandlePass();
+        moduleSolved = true;
+    }
+
+        void Awake()
     {
         symbolMesh.text = "-";
         stageMesh.text = "00";

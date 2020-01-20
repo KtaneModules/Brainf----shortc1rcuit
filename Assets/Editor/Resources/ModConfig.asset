@@ -20,7 +20,7 @@ MonoBehaviour:
     to Brainf--- to work with the KTaNE repo\n\nBuild 1.2 notes:\nAdded TP support\nFixed
     text issue\n\nBuild 1.3 notes:\nAdded awardpoints command\n\nBuild 1.4 notes:\nStopped
     . and , from being too concentrated\n\nBuild 1.5 notes:\nBalanced out the scoring
-    for tp"
-  version: 1.5
+    for tp\n\nBuild 1.6 notes:\nFixed autosolve"
+  version: 1.6
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}

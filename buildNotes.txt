@@ -25,3 +25,6 @@ Stopped . and , from being too concentrated
 
 Build 1.5 notes:
 Balanced out the scoring for tp
+
+Build 1.6 notes:
+Fixed autosolve
