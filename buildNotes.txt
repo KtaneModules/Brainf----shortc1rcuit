@@ -28,3 +28,7 @@ Balanced out the scoring for tp
 
 Build 1.6 notes:
 Fixed autosolve
+
+Build 1.7 notes:
+Bugfixes
+Better distribution of commas and fullstops.

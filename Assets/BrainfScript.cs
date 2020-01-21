@@ -82,11 +82,14 @@ public class BrainfScript : MonoBehaviour
         }
         else if (command == "ok")
         {
-            yield return null;
-            keypad[10].OnInteract();
-            if (fullStopSolved)
+            if (!fullStopSolved)
             {
-                yield return "awardpoints 5";
+                yield return null;
+                keypad[10].OnInteract();
+                if (fullStopSolved & answers.Count != 0)
+                {
+                    yield return "awardpoints 5";
+                }
             }
         }
         else if (command == "clr")
@@ -106,7 +109,7 @@ public class BrainfScript : MonoBehaviour
         moduleSolved = true;
     }
 
-        void Awake()
+    void Awake()
     {
         symbolMesh.text = "-";
         stageMesh.text = "00";
@@ -180,17 +183,32 @@ public class BrainfScript : MonoBehaviour
 
             /*The comma and the full stop should only occur after char 10 in the program and at least 10 characters before the end of the program
 			  This is so the is still time to adjust the value of that cell*/
-            if ((program[i] == ',' || program[i] == '.'))
+            if (program[i] == ',' || program[i] == '.')
             {
-                if (i < 10 || i > (size - 10) || openloop == true)
+                if (openloop)
+                {
+                    //Subtracts 1 from the for loop counter so it can regenerate a new random character
+                    i -= 1;
+                }
+                if ((i < 5 || i > (size - 5)) & program[i] == '.')
                 {
                     //Subtracts 1 from the for loop counter so it can regenerate a new random character
                     i -= 1;
                 }
                 else
                 {
+                    int temp;
+                    if (i < 5)
+                    {
+                        temp = i;
+                    }
+                    else
+                    {
+                        temp = 5;
+                    }
+
                     //Loops through the last 10 characters check to see if they are the same as the current one
-                    for (int j = 1; j <= 10; j++)
+                    for (int j = 1; j <= temp; j++)
                     {
                         if (program[i - j] == program[i])
                         {
@@ -307,7 +325,7 @@ public class BrainfScript : MonoBehaviour
                     y = tape[tapepos - 1];
                 }
                 //Modulo the value by 6 and add 1 to it.
-                y = (y % 6) + 1;
+                y = (y % 6);
 
                 //Take the character in the serial number that is in the position indicated by the number you just got.
                 char character = bomb.GetSerialNumber().ToCharArray()[y];
@@ -336,6 +354,7 @@ public class BrainfScript : MonoBehaviour
             {
                 //Adds it to the list of answers
                 answers.Add((tape[tapepos] % 100).ToString());
+                Debug.LogFormat("[Brainf--- #{0}] Answer {1} is equal to {2}.", moduleId, answers.Count, (tape[tapepos] % 100).ToString());
             }
             stepcount++;
         }
@@ -393,7 +412,7 @@ public class BrainfScript : MonoBehaviour
         int count = bomb.GetSolvableModuleNames().Where(x => !Ignoreds.Contains(x)).Count();
 
         //Ends the module if there are no solvable modules that aren't in the ignoreds list
-        if (count == 0)
+        if (count == 1)
         {
             GetComponent<KMBombModule>().HandlePass();
             Debug.LogFormat("[Brainf--- #{0}] Some error occured where the solveable module count is 0. Automatically solving.", moduleId);
@@ -402,7 +421,7 @@ public class BrainfScript : MonoBehaviour
         else
         {
             //Runs the generate program method with the array size of the value just worked out
-            script = GenerateProgram(count);
+            script = GenerateProgram(50);
             Debug.LogFormat("[Brainf--- #{0}] The program is {1}", moduleId, new string(script));
 
             //Gives us all the answers that we have to input
