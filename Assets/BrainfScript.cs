@@ -412,7 +412,7 @@ public class BrainfScript : MonoBehaviour
         int count = bomb.GetSolvableModuleNames().Where(x => !Ignoreds.Contains(x)).Count();
 
         //Ends the module if there are no solvable modules that aren't in the ignoreds list
-        if (count == 1)
+        if (count == 0)
         {
             GetComponent<KMBombModule>().HandlePass();
             Debug.LogFormat("[Brainf--- #{0}] Some error occured where the solveable module count is 0. Automatically solving.", moduleId);
@@ -421,7 +421,7 @@ public class BrainfScript : MonoBehaviour
         else
         {
             //Runs the generate program method with the array size of the value just worked out
-            script = GenerateProgram(50);
+            script = GenerateProgram(count);
             Debug.LogFormat("[Brainf--- #{0}] The program is {1}", moduleId, new string(script));
 
             //Gives us all the answers that we have to input

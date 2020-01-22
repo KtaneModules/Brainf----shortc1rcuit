@@ -32,3 +32,6 @@ Fixed autosolve
 Build 1.7 notes:
 Bugfixes
 Better distribution of commas and fullstops.
+
+Build 1.8 notes:
+Bugfixes
