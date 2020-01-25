@@ -35,3 +35,6 @@ Better distribution of commas and fullstops.
 
 Build 1.8 notes:
 Bugfixes
+
+Build 1.9 notes:
+Re-write of the program generator to make it more efficient and to prevent bugs

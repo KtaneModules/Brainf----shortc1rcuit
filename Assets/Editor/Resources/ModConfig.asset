@@ -15,13 +15,16 @@ MonoBehaviour:
   title: Brainf---
   author: short_c1rcuit
   description: "Brainf---\n-[--->+<]>---.[------>+<]>--.--[--->+<]>-.+++[->+++<]>.-.-[--->+<]>-.[-->+++<]>+.+.--[--->++<]>.++[->+++<]>.+++++++++.+++.[-->+++++<]>+++.+[----->+<]>.----.+++.--------.-[--->+<]>-.[->+++<]>++.-.+++.-[--->+<]>-.++[--->++<]>.-----------.+++++++++++++.-------.--[--->+<]>--.[->+++<]>++.++++++.--.[->+++<]>-.\r\n\r\nModule
-    ID: brainf\r\n\r\nCreated by Short_c1rcuit\r\n\r\nManual available here: https://ktane.timwi.de/HTML/Brainf---.html\n\r\nBuild
+    ID: brainf\r\n\r\nCreated by Short_c1rcuit\r\nCredit to IQuick 143 for helping
+    with the code\n\r\nManual available here: https://ktane.timwi.de/HTML/Brainf---.html\n\r\nBuild
     1.0 notes:\r\nInitial release\n\nBuild 1.1 notes:\nChanged the name from Brainf***
     to Brainf--- to work with the KTaNE repo\n\nBuild 1.2 notes:\nAdded TP support\nFixed
     text issue\n\nBuild 1.3 notes:\nAdded awardpoints command\n\nBuild 1.4 notes:\nStopped
     . and , from being too concentrated\n\nBuild 1.5 notes:\nBalanced out the scoring
     for tp\n\nBuild 1.6 notes:\nFixed autosolve\n\nBuild 1.7 notes:\nBugfixes\nBetter
-    distribution of commas and fullstops.\n\nBuild 1.8 notes:\nBugfixes"
-  version: 1.8
+    distribution of commas and fullstops.\n\nBuild 1.8 notes:\nBugfixes\n\nBuild 1.9
+    notes:\nRe-write of the program generator to make it more efficient and to prevent
+    bugs"
+  version: 1.9
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}

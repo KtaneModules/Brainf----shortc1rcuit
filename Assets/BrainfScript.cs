@@ -26,10 +26,6 @@ public class BrainfScript : MonoBehaviour
     //Defines the keys on the keypad
     public KMSelectable[] keypad;
 
-    //array to store all the types of Brainf--- characters
-    readonly char[] symbols = new char[8] { '<', '>', '+', '-', '[', ']', ',', '.' };
-    int sympos;
-
     //array to store the randomly generated program
     char[] script;
 
@@ -128,99 +124,95 @@ public class BrainfScript : MonoBehaviour
     //Used to randomly generate a program in Brainf--- for the module to use
     char[] GenerateProgram(int size)
     {
+        //amount of characters inside the loop + 1
+        int loopsize;
+        //How many characters go before the loop
+        int beforeloop;
+
+        //array to store the randomly generated program in the method. We add one to store the fullstop at the end
+        char[] program = new char[size + 1];
+
+        int i = 0;
+
+        //Pass 1: adding loops
+        while (i < size)
+        {
+            //sets the gap before the loop (1-5)
+            beforeloop = UnityEngine.Random.Range(1, 6);
+            //sets the amount of characters in the loop (1-5)
+            loopsize = UnityEngine.Random.Range(2, 7);
+
+            //If you cant fit in the loop
+            if (beforeloop + loopsize + i >= size)
+            {
+                //exit Pass 1
+                break;
+            }
+            //Sets the start and end of the loop
+            program[i + beforeloop] = '[';
+            program[i + beforeloop + loopsize] = ']';
+
+            //Moves froward
+            i += beforeloop + loopsize + 1;
+        }
+
         //bool to see whether there is a loop that isn't finished
         bool openloop = false;
 
-        //the desired length of the loop
-        int loopend = -1;
+        //Used to space out commas and fullstops (commapos is set to -5 to allow it to appear from the start)
+        int commapos = -5;
+        int fullstoppos = 0;
 
-        //array to store the randomly generated program in the methhod we add one to store the fullstop at the end
-        char[] program = new char[size + 1];
-
-        //For loop to generate the Brainf--- code
-        for (int i = 0; i < size; i++)
+        //Pass 2: Add other characters
+        for (int j = 0; j < size; j++)
         {
-            //take a random Brainf--- character and puts it the programm array
-            sympos = UnityEngine.Random.Range(0, 8);
-            program[i] = symbols[sympos];
+            //array to store all the types of Brainf--- characters (except loops)
+            List<char> symbols = new List<char> { '<', '>', '+', '-', ',', '.' };
 
-            //This if statement prevents nested looping so the numbers don't get too big
-            //This also prevents a loop being generated past the end of the code
-            if (program[i] == '[' & (openloop == true || i > size - 5))
+            //Makes note of whether the loop is open or not
+            if (program[j] == '[')
             {
-                //Subtracts 1 from the for loop counter so it can regenerate a new random character
-                i -= 1;
-                continue;
-            }
-            //If we have an open loop char that satisfies our requirements
-            else if (program[i] == '[')
-            {
-                //The loop is now open
                 openloop = true;
-                //Generates a random loop length and finds the point where the loop will end
-                loopend = i + UnityEngine.Random.Range(2, 5);
                 continue;
             }
-
-            //If we have an end loop char and we aren't at the desired loop length or there isn't a start loop
-            if (program[i] == ']' & (i != loopend || openloop == false))
+            else if(program[j] == ']')
             {
-                //Subtracts 1 from the for loop counter so it can regenerate a new random character
-                i -= 1;
-                continue;
-            }
-
-            //If this is where the loop ends
-            if (openloop == true & i == loopend)
-            {
-                //Set the current character to an end loop
-                program[i] = ']';
-                //The loop is now closed
                 openloop = false;
-                loopend = -1;
                 continue;
             }
 
-            /*The comma and the full stop should only occur after char 10 in the program and at least 10 characters before the end of the program
-			  This is so the is still time to adjust the value of that cell*/
-            if (program[i] == ',' || program[i] == '.')
+            //Doesn't allow , and . to appear in a loop
+            if (openloop)
             {
-                if (openloop)
-                {
-                    //Subtracts 1 from the for loop counter so it can regenerate a new random character
-                    i -= 1;
-                }
-                if ((i < 5 || i > (size - 5)) & program[i] == '.')
-                {
-                    //Subtracts 1 from the for loop counter so it can regenerate a new random character
-                    i -= 1;
-                }
-                else
-                {
-                    int temp;
-                    if (i < 5)
-                    {
-                        temp = i;
-                    }
-                    else
-                    {
-                        temp = 5;
-                    }
+                symbols.Remove(',');
+                symbols.Remove('.');
+            }
 
-                    //Loops through the last 10 characters check to see if they are the same as the current one
-                    for (int j = 1; j <= temp; j++)
-                    {
-                        if (program[i - j] == program[i])
-                        {
-                            //Subtracts 1 from the for loop counter so it can regenerate a new random character
-                            i -= 1;
-                            break;
-                        }
-                    }
-                }
-                continue;
+            //Doesn't allow commas/fullstops to appear within 5 steps of annother
+            if (j - commapos < 5 || size - j < 5)
+            {
+                symbols.Remove(',');
+            }
+            if (j - fullstoppos < 5 || size - j < 5)
+            {
+                symbols.Remove('.');
+            }
+
+            //Gives a valid symbol to the program
+            program[j] = symbols[UnityEngine.Random.Range(0, symbols.Count)];
+
+            if(program[j] == ',')
+            {
+                //Updates the position of the last comma
+                commapos = j;
+            }
+            else if (program[j] == '.')
+            {
+                //Updates the position of the last full stop
+                fullstoppos = j;
             }
         }
+
         //Adds a fullstop to the end to get the defuser to enter the final result
         program[size] = '.';
         return program;
@@ -473,6 +465,7 @@ public class BrainfScript : MonoBehaviour
                 {
                     answers.RemoveAt(0);
                     fullStopSolved = true;
+                    Debug.LogFormat("[Brainf--- #{0}] You submitted {1}. Incorrect.", moduleId, stageMesh.text);
 
                     //Once all the answers have been inputted
                     if (answers.Count == 0)
