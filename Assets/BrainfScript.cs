@@ -292,8 +292,8 @@ public class BrainfScript : MonoBehaviour
             }
             else if (program[i] == ']')
             {
-                //The origanal rules of looping still apply. However, each loop can repeat no more than x times where x = batteries + 1
-                if ((tape[tapepos] == 0) | (looptimes == bomb.GetBatteryCount() + 1))
+                //The origanal rules of looping still apply. However, each loop can repeat no more than x times where x = batteries + 1. We don't add one in the code as it would cause an OBOE.
+                if ((tape[tapepos] == 0) | (looptimes == bomb.GetBatteryCount()))
                 {
                     Debug.LogFormat("[Brainf--- #{0}] End of loop.", moduleId);
                 }
@@ -465,7 +465,7 @@ public class BrainfScript : MonoBehaviour
                 {
                     answers.RemoveAt(0);
                     fullStopSolved = true;
-                    Debug.LogFormat("[Brainf--- #{0}] You submitted {1}. Incorrect.", moduleId, stageMesh.text);
+                    Debug.LogFormat("[Brainf--- #{0}] You submitted {1}. Correct.", moduleId, stageMesh.text);
 
                     //Once all the answers have been inputted
                     if (answers.Count == 0)

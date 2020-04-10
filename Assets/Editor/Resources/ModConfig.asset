@@ -24,7 +24,10 @@ MonoBehaviour:
     for tp\n\nBuild 1.6 notes:\nFixed autosolve\n\nBuild 1.7 notes:\nBugfixes\nBetter
     distribution of commas and fullstops.\n\nBuild 1.8 notes:\nBugfixes\n\nBuild 1.9
     notes:\nRe-write of the program generator to make it more efficient and to prevent
-    bugs"
-  version: 1.9
+    bugs\n\nBuild 1.10 notes:\nSlightly changed the rules for looping to be more fair
+    (manual reprint required). IMPORTANT NOTE: this update DOES NOT INVALIDATE CALEB'S
+    TUTORIAL. It in fact does the opposite.\n\nBuild 1.11 notes:\nRewrote one of the
+    loglines that was causing confusion."
+  version: 1.11
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}
