@@ -44,3 +44,6 @@ Slightly changed the rules for looping to be more fair (manual reprint required)
 
 Build 1.11 notes:
 Rewrote one of the loglines that was causing confusion.
+
+Build 1.12 notes:
+Fixed tp command bug

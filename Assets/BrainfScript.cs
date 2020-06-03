@@ -67,7 +67,7 @@ public class BrainfScript : MonoBehaviour
         }
 
         //If the input is a 1 or 2 digit number
-        if (Regex.IsMatch(command, @"^\d{1,2}"))
+        if (Regex.IsMatch(command, @"^\d{1,2}$"))
         {
             //Goes through each digit to 
             foreach (char digit in command)
