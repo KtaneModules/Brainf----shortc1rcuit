@@ -47,3 +47,6 @@ Rewrote one of the loglines that was causing confusion.
 
 Build 1.12 notes:
 Fixed tp command bug
+
+Build 1.12.1 notes:
+Fixed another tp command bug

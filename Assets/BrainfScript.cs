@@ -537,6 +537,9 @@ public class BrainfScript : MonoBehaviour
             solvedModules = newSolves.Count();
             symbolMesh.text = script[solvedModules].ToString();
 
+            //Clears the inputed data 
+            inputStarted = false;
+
             //The stage number display shows the last 2 digits of the stage number
             if (solvedModules < 10)
             {

@@ -27,7 +27,8 @@ MonoBehaviour:
     bugs\n\nBuild 1.10 notes:\nSlightly changed the rules for looping to be more fair
     (manual reprint required). IMPORTANT NOTE: this update DOES NOT INVALIDATE CALEB'S
     TUTORIAL. It in fact does the opposite.\n\nBuild 1.11 notes:\nRewrote one of the
-    loglines that was causing confusion.\n\nBuild 1.12 notes:\nFixed tp command bug"
-  version: 1.11
+    loglines that was causing confusion.\n\nBuild 1.12 notes:\nFixed tp command bug\n\nBuild
+    1.12.1 notes:\nFixed another tp command bug"
+  version: 1.12.1
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}
