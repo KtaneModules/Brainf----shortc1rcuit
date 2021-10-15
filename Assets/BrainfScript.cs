@@ -64,6 +64,7 @@ public class BrainfScript : MonoBehaviour
         if (fullStopSolved)
         {
             yield return "sendtochaterror Now is not the time to input.";
+            yield break;
         }
 
         //If the input is a 1 or 2 digit number
@@ -439,19 +440,7 @@ public class BrainfScript : MonoBehaviour
         //If the button pressed was clr
         if (number == 11)
         {
-            //The stage number display shows the last 2 digits of the stage number
-            if (solvedModules < 10)
-            {
-                stageMesh.text = "0" + solvedModules.ToString();
-            }
-            else if (solvedModules > 99)
-            {
-                stageMesh.text = (solvedModules % 100).ToString();
-            }
-            else
-            {
-                stageMesh.text = solvedModules.ToString();
-            }
+            DisplayStage(solvedModules);
             //Clears the inputed data 
             inputStarted = false;
         }
@@ -482,20 +471,11 @@ public class BrainfScript : MonoBehaviour
                     //Gives a strike
                     GetComponent<KMBombModule>().HandleStrike();
                     Debug.LogFormat("[Brainf--- #{0}] You submitted {1}, when the answer was {2}. Incorrect.", moduleId, stageMesh.text, answers[0]);
+                    Debug.LogFormat("[Brainf--- #{0}] Commencing stage recovery", moduleId);
 
-                    //The stage number display shows the last 2 digits of the stage number
-                    if (solvedModules < 10)
-                    {
-                        stageMesh.text = "0" + solvedModules.ToString();
-                    }
-                    else if (solvedModules > 99)
-                    {
-                        stageMesh.text = (solvedModules % 100).ToString();
-                    }
-                    else
-                    {
-                        stageMesh.text = solvedModules.ToString();
-                    }
+                    StartCoroutine(StageRecovery(solvedModules));
+
+                    DisplayStage(solvedModules);
                 }
             }
             //Clears the inputed data 
@@ -513,6 +493,17 @@ public class BrainfScript : MonoBehaviour
             stageMesh.text += number.ToString();
         }
     }
+
+    //Displays previous stages up to the current one
+    IEnumerator StageRecovery(int currentStage)
+	{
+		for (int i = 0; i <= currentStage; i++)
+		{
+            yield return new WaitForSeconds(1f);
+            DisplaySymbol(script[i]);
+            DisplayStage(i);
+        }
+	}
 
     // Fixed updated calls at a fixed amount regardless of frame rate
     void Update()
@@ -535,24 +526,12 @@ public class BrainfScript : MonoBehaviour
 
             //Updates the solve count and displays
             solvedModules = newSolves.Count();
-            symbolMesh.text = script[solvedModules].ToString();
+            DisplaySymbol(script[solvedModules]);
 
             //Clears the inputed data 
             inputStarted = false;
 
-            //The stage number display shows the last 2 digits of the stage number
-            if (solvedModules < 10)
-            {
-                stageMesh.text = "0" + solvedModules.ToString();
-            }
-            else if (solvedModules > 99)
-            {
-                stageMesh.text = (solvedModules % 100).ToString();
-            }
-            else
-            {
-                stageMesh.text = solvedModules.ToString();
-            }
+            DisplayStage(solvedModules);
 
             //When the stage advances without the defuser solving the fullstop, it will give a strike but still progress
             if (fullStopSolved == false)
@@ -568,16 +547,38 @@ public class BrainfScript : MonoBehaviour
             {
                 fullStopSolved = false;
             }
+        }
+    }
 
-            //Moves the text so it is in the centre
-            if (script[solvedModules] == '.' | script[solvedModules] == ',')
-            {
-                symbolMesh.transform.localPosition = new Vector3(0.0f, 0.27f, 2.64f);
-            }
-            else
-            {
-                symbolMesh.transform.localPosition = new Vector3(0.0f, 0.27f, 0.04f);
-            }
+    void DisplaySymbol(char symbol)
+	{
+        symbolMesh.text = symbol.ToString();
+
+        //Moves the text so it is in the centre
+        if (symbol == '.' | symbol == ',')
+        {
+            symbolMesh.transform.localPosition = new Vector3(0.0f, 0.27f, 2.64f);
+        }
+        else
+        {
+            symbolMesh.transform.localPosition = new Vector3(0.0f, 0.27f, 0.04f);
+        }
+    }
+
+    void DisplayStage(int stage)
+	{
+        //The stage number display shows the last 2 digits of the stage number
+        if (stage < 10)
+        {
+            stageMesh.text = "0" + stage.ToString();
+        }
+        else if (stage > 99)
+        {
+            stageMesh.text = (stage % 100).ToString();
+        }
+        else
+        {
+            stageMesh.text = stage.ToString();
         }
     }
 }
