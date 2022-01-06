@@ -56,3 +56,6 @@ Added stage recovery
 
 Build 1.14 notes
 Fixed multiple responses being sent on TP
+
+Build 1.15 notes
+Fixed stage recovery bug

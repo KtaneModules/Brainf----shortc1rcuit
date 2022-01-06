@@ -29,7 +29,8 @@ MonoBehaviour:
     TUTORIAL. It in fact does the opposite.\n\nBuild 1.11 notes:\nRewrote one of the
     loglines that was causing confusion.\n\nBuild 1.12 notes:\nFixed tp command bug\n\nBuild
     1.12.1 notes:\nFixed another tp command bug\n\nBuild 1.13\nAdded stage recovery\n\nBuild
-    1.14 notes\nFixed multiple responses being sent on TP"
-  version: 1.14
+    1.14 notes\nFixed multiple responses being sent on TP\n\nBuild 1.15 notes\nFixed
+    stage recovery bug"
+  version: 1.15
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}

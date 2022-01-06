@@ -52,6 +52,9 @@ public class BrainfScript : MonoBehaviour
     //Used to blank the stage number for user input
     bool inputStarted;
 
+    //Used to prevent multiple stage recoveries from running at the same time]
+    bool doingStageRecovery;
+
     //Twitch help message
 #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"Input the answer with “!{0} (answer)”, eg: “!{0} 28” to input 28. Use “!{0} clr” to clear the input and “!{0} ok” to submit.";
@@ -473,7 +476,10 @@ public class BrainfScript : MonoBehaviour
                     Debug.LogFormat("[Brainf--- #{0}] You submitted {1}, when the answer was {2}. Incorrect.", moduleId, stageMesh.text, answers[0]);
                     Debug.LogFormat("[Brainf--- #{0}] Commencing stage recovery", moduleId);
 
-                    StartCoroutine(StageRecovery(solvedModules));
+					if (!doingStageRecovery)
+					{
+                        StartCoroutine(StageRecovery(solvedModules));
+                    }
 
                     DisplayStage(solvedModules);
                 }
@@ -497,13 +503,15 @@ public class BrainfScript : MonoBehaviour
     //Displays previous stages up to the current one
     IEnumerator StageRecovery(int currentStage)
 	{
+        doingStageRecovery = true;
 		for (int i = 0; i <= currentStage; i++)
 		{
             yield return new WaitForSeconds(1f);
             DisplaySymbol(script[i]);
             DisplayStage(i);
         }
-	}
+        doingStageRecovery = false;
+    }
 
     // Fixed updated calls at a fixed amount regardless of frame rate
     void Update()
