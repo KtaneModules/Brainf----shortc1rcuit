@@ -52,8 +52,11 @@ public class BrainfScript : MonoBehaviour
     //Used to blank the stage number for user input
     bool inputStarted;
 
-    //Used to prevent multiple stage recoveries from running at the same time]
+    //Used to prevent multiple stage recoveries from running at the same time
     bool doingStageRecovery;
+
+    //Any time a user submits for a period on TP, they are given points equal to the number stages since the last period + 2
+    int stagesSinceLastPeriod = -1;
 
     //Twitch help message
 #pragma warning disable 414
@@ -88,7 +91,7 @@ public class BrainfScript : MonoBehaviour
                 keypad[10].OnInteract();
                 if (fullStopSolved & answers.Count != 0)
                 {
-                    yield return "awardpoints 5";
+                    yield return "awardpoints " + (stagesSinceLastPeriod + 2).ToString();
                 }
             }
         }
@@ -540,6 +543,13 @@ public class BrainfScript : MonoBehaviour
             inputStarted = false;
 
             DisplayStage(solvedModules);
+
+			if (solvedModules > 0 && script[solvedModules - 1] == '.')
+			{
+                stagesSinceLastPeriod = -1;
+			}
+
+            stagesSinceLastPeriod++;
 
             //When the stage advances without the defuser solving the fullstop, it will give a strike but still progress
             if (fullStopSolved == false)

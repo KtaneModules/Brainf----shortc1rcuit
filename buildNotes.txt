@@ -59,3 +59,6 @@ Fixed multiple responses being sent on TP
 
 Build 1.15 notes
 Fixed stage recovery bug
+
+Build 1.16 notes
+New TP scoring system (number of instructions between the last input and this one + 2)
