@@ -62,3 +62,6 @@ Fixed stage recovery bug
 
 Build 1.16 notes
 New TP scoring system (number of instructions between the last input and this one + 2)
+
+Build 1.17 notes
+Fixed TP scoring system (points are now also awarded after the last submission)

@@ -31,7 +31,8 @@ MonoBehaviour:
     1.12.1 notes:\nFixed another tp command bug\n\nBuild 1.13\nAdded stage recovery\n\nBuild
     1.14 notes\nFixed multiple responses being sent on TP\n\nBuild 1.15 notes\nFixed
     stage recovery bug\n\nBuild 1.16 notes\nNew TP scoring system (number of instructions
-    between the last input and this one + 2)"
-  version: 1.16
+    between the last input and this one + 2)\n\nBuild 1.17 notes\nFixed TP scoring
+    system (points are now also awarded after the last submission)"
+  version: 1.17
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 019b288350fbe0d42b2d710fc15e04ae, type: 3}

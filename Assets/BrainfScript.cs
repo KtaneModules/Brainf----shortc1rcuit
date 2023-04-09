@@ -89,7 +89,7 @@ public class BrainfScript : MonoBehaviour
             {
                 yield return null;
                 keypad[10].OnInteract();
-                if (fullStopSolved & answers.Count != 0)
+                if (fullStopSolved)
                 {
                     yield return "awardpoints " + (stagesSinceLastPeriod + 2).ToString();
                 }
